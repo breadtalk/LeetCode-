@@ -1,0 +1,54 @@
+The recursive method is not very good in regarding to time and space complexity. Use the helper method. 
+
+class Solution {
+      public boolean validPalindrome(String s) {
+          char[] sChar = new char[s.length()];
+          for (int m=0;m<s.length();m++){
+              sChar[m]=s.charAt(m);
+          }
+          int i = 0;
+          int j = s.length()-1;
+          boolean deleted = false;
+          boolean tryJ=false;
+          return validPalindromeR(sChar,i,j,deleted,tryJ);
+
+
+      }
+
+      private boolean validPalindromeR(char[] sChar, Integer i, Integer j, boolean deleted, boolean tryJ){
+          if(i>j){
+              return true;
+          }
+          else if(sChar[i]==sChar[j]){
+              return validPalindromeR(sChar, i+1, j-1, deleted, tryJ);
+          }
+          else if(sChar[i]!=sChar[j] && deleted && !tryJ){
+              return false;
+          }
+          else if(sChar[i]!=sChar[j] && tryJ){
+              tryJ=false;
+              return validPalindromeR(sChar, i-1, j-1,deleted,tryJ);
+          }
+          else{
+              if(sChar[i+1]!=sChar[j]&&sChar[i]!=sChar[j-1]){
+                  return false;
+              }
+              else if(sChar[i+1]==sChar[j] && sChar[i]==sChar[j-1]){
+                  deleted=true;
+                  tryJ=true;
+                  return validPalindromeR(sChar,i+2,j-1,deleted,tryJ);
+              }
+              
+              else if(sChar[i+1]==sChar[j]){
+                  deleted=true;
+                  return validPalindromeR(sChar,i+2,j-1,deleted,tryJ);
+              }
+              else{
+                  deleted=true;
+                  return validPalindromeR(sChar,i+1,j-2,deleted,tryJ);
+              }
+
+          }
+
+      }
+}
