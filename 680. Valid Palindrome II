@@ -1,5 +1,7 @@
 The recursive method is not very good in regarding to time and space complexity. Use the helper method. 
 
+Method 1. Using Resursive
+
 class Solution {
       public boolean validPalindrome(String s) {
           char[] sChar = new char[s.length()];
@@ -51,4 +53,37 @@ class Solution {
           }
 
       }
+}
+
+Method 2 Using the helper method
+
+class Solution {
+    public boolean validPalindrome(String s) {
+        char[] sChar = new char[s.length()];
+        for (int m=0;m<s.length();m++){
+              sChar[m]=s.charAt(m);
+          }
+          int i = 0;
+          int j = s.length()-1;
+        while(i<=j){
+            if(sChar[i]!=sChar[j]){
+                return (isPalindrome(sChar,i+1,j) || isPalindrome(sChar,i, j-1));
+            }
+            i++;
+            j--;
+        }
+        return true;
+        
+    }
+    
+    private boolean isPalindrome(char[] sChar, int i, int j){
+        while(i<=j){
+            if(sChar[i]!=sChar[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
 }
