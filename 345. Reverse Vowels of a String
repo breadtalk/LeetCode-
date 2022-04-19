@@ -1,0 +1,51 @@
+class Solution {
+    public String reverseVowels(String s) {
+        int i = 0;
+        int j = s.length()-1;
+        HashSet<Character> vowelSet = new HashSet<>();
+        vowelSet.add('a');
+        vowelSet.add('e');
+        vowelSet.add('i');
+        vowelSet.add('o');
+        vowelSet.add('u');
+        vowelSet.add('A');
+        vowelSet.add('E');
+        vowelSet.add('I');
+        vowelSet.add('O');
+        vowelSet.add('U');
+        char[] chars = new char[s.length()];
+        for (int m=0; m<s.length(); m++){
+            chars[m]=s.charAt(m);
+        }
+        while(i<j){
+            if(vowelSet.contains(chars[i]) && vowelSet.contains(chars[j])){
+                char temp = chars[i];
+                chars[i]=chars[j];
+                chars[j]=temp;
+                i++;
+                j--;
+            }
+            else if(vowelSet.contains(chars[i])){
+                j--;
+            }
+            else if(vowelSet.contains(chars[j])){
+                i++;
+            }
+            else{
+                i++;
+                j--;
+            }
+            
+        }
+        
+        StringBuilder sb = new StringBuilder();
+         for (Character ch : chars) {
+            sb.append(ch);
+        }
+        String string = sb.toString();
+        return string;
+        
+                
+
+    }
+}
