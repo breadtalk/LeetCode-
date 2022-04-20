@@ -1,0 +1,36 @@
+Any int*int consider using 除法
+不要忘记考虑0的情况
+
+
+class Solution {
+    public int mySqrt(int x) {
+        if(x == 0){
+            return 0;
+        }
+        int i = 1;
+        int j = x;
+        int middle = (i + j)/2;
+        boolean isLarger = true;
+        while (i <= j){
+            middle = (i + j)/2;
+            if(x/middle == middle){
+                isLarger=true;
+                return middle;
+            }
+            else if(x/middle<middle){
+                isLarger=false;
+                j=middle-1;
+            }
+            else{
+                isLarger=true;
+                i=middle+1;
+            }
+        }
+        if(!isLarger){
+            return middle-1;
+        }
+        else{
+            return middle;
+        }
+    }
+}
