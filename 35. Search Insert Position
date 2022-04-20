@@ -1,0 +1,36 @@
+Application of binary search 704
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+        int middle = 0;
+        boolean isLarger = true;
+        
+        while (start<=end){
+            middle = (start+end)/2;
+            if(target==nums[middle]){
+                return middle;
+            }
+            else if(target<nums[middle]){
+                isLarger=false;
+                end = middle-1;
+            }
+            else{
+                isLarger=true;
+                start=middle+1;
+            }
+        }
+        
+        if(isLarger){
+            return middle+1;
+        }
+        else{
+            return middle;
+        }
+        
+        
+
+        
+    }
+}
