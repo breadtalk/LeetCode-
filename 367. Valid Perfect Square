@@ -1,0 +1,25 @@
+The experession on line 12 and 15 is important 
+Make sure that you are comparing the doubles instead of int
+
+
+
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int start = 1;
+        int end = num;
+        int middle = -1;
+        while(start <= end){
+            middle = (start + end)/2;
+            if(1.0*num/middle == 1.0*middle){
+                return true;
+            }
+            else if(1.0*num/middle < 1.0*middle){
+                end = middle-1;
+            }
+            else{
+                start = middle+1;
+            }
+        }
+        return false;
+    }
+}
