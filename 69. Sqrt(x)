@@ -1,5 +1,7 @@
 Any int*int consider using 除法
 不要忘记考虑0的情况
+1.0*x/middle == 1.0*middle expression is very important 
+int/int only gives you int
 
 
 class Solution {
@@ -13,11 +15,11 @@ class Solution {
         boolean isLarger = true;
         while (i <= j){
             middle = (i + j)/2;
-            if(x/middle == middle){
+            if(1.0*x/middle == 1.0*middle){
                 isLarger=true;
                 return middle;
             }
-            else if(x/middle<middle){
+            else if(1.0*x/middle < 1.0*middle){
                 isLarger=false;
                 j=middle-1;
             }
