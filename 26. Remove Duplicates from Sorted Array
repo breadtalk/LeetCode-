@@ -1,0 +1,19 @@
+use fast and slow Index to track deplicates
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int fastIndex = 1;
+        int slowIndex = 1;
+        while(fastIndex>=1 && fastIndex<=nums.length-1){
+            if(nums[fastIndex]!=nums[fastIndex-1]){
+                nums[slowIndex]=nums[fastIndex];
+                fastIndex++;
+                slowIndex++;
+            }
+            else{
+                fastIndex++;
+            }
+        }
+        return slowIndex;
+    }
+}
