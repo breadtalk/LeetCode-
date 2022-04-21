@@ -1,6 +1,8 @@
 This one needs to be revisited. 
 The edge case for while loop is very confusing
 
+First method is to exchange starting from the last element. 
+
 class Solution {
     public int removeElement(int[] nums, int val) {
         int start = 0;
@@ -29,4 +31,30 @@ class Solution {
         
     }
     
+}
+
+
+
+
+Second method is to use two 指针
+
+
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int fastIndex=0;
+        int slowIndex=0;
+        while(fastIndex<=nums.length-1){
+            if(nums[fastIndex]!=val){
+                nums[slowIndex]=nums[fastIndex];
+                fastIndex++;
+                slowIndex++;
+            }
+            else{
+                fastIndex++;
+            }
+            
+        }
+        return slowIndex;
+    }
 }
