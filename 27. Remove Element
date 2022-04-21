@@ -1,0 +1,32 @@
+This one needs to be revisited. 
+The edge case for while loop is very confusing
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int start = 0;
+        int count = 0;
+        int end = nums.length-1;
+        
+        while(start<=end){
+            while(nums[end]==val && end>start){
+                count++;
+                end--;
+            }
+            
+            if(nums[start]==val){
+                count++;
+                int temp=nums[start];
+                nums[start]=nums[end];
+                nums[end]=temp;
+                start++;
+                end--;
+            }
+            else{
+                start++;
+            }
+        }
+        return nums.length-count;
+        
+    }
+    
+}
