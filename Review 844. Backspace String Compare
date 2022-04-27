@@ -1,0 +1,33 @@
+用指针的方法achieve O(n) time complexity and O(1) space complexity 
+
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        int sPos = s.length()-1;
+        int skipS = 0;
+        int tPos = t.length()-1;
+        int skipT = 0;       
+        while(sPos >= 0 || tPos >= 0){
+            while(sPos >= 0){
+                if(s.charAt(sPos) == '#') {skipS++; sPos--;}
+                else if (skipS > 0){skipS--; sPos--;}
+                else {break;}
+            }
+            while(tPos >= 0){
+                if(t.charAt(tPos) == '#'){skipT++; tPos--;}
+                else if (skipT > 0){skipT--; tPos--;}
+                else {break;}
+            }
+            
+            if (sPos >= 0 && tPos >= 0 && s.charAt(sPos) != t.charAt(tPos)){
+                return false;
+            }
+            
+            if((sPos >= 0) != (tPos >= 0)){
+                return false;
+            }
+            sPos--;
+            tPos--;
+        }
+        return true;
+    }
+}
