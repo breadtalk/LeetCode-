@@ -49,3 +49,7 @@ class Solution {
         return squares;
     }
 }
+
+
+
+第二个办法 最大值永远在两端 所以只要比较两端就可以了
