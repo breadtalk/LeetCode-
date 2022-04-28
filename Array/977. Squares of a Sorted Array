@@ -1,0 +1,51 @@
+用两个指针
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] squares = new int[nums.length];
+        if(nums[0]>=0){
+            for(int i=0;i<nums.length;i++){
+                squares[i]=nums[i]*nums[i];
+            }
+        }
+        else if(nums[nums.length-1]<=0){
+            for(int i=0;i<nums.length;i++){
+                squares[i]=nums[nums.length-1-i]*nums[nums.length-1-i];
+            }
+        }
+        else{
+            int posIdx=0;
+            int negIdx=0;
+            while(nums[negIdx]<0){
+                negIdx++;
+            }
+            posIdx=negIdx;
+            negIdx=negIdx-1;
+            int j=0;
+
+            while(negIdx>=0 && posIdx <= nums.length-1){
+                if (nums[posIdx]<(-1)*nums[negIdx]){
+                    squares[j]=nums[posIdx]*nums[posIdx];
+                    posIdx++;
+                    j++;
+                }
+                else{
+                    squares[j]=nums[negIdx]*nums[negIdx];
+                    negIdx--;
+                    j++;
+                }
+            }
+            while(negIdx>=0){
+                squares[j]=nums[negIdx]*nums[negIdx];
+                negIdx--;
+                j++;
+            }
+            while(posIdx<=nums.length-1){
+                squares[j]=nums[posIdx]*nums[posIdx];
+                posIdx++;
+                j++;
+            }
+        }
+        return squares;
+    }
+}
