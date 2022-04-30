@@ -1,0 +1,30 @@
+fill in the numbers layer by layer
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] results= new int[n][n];
+        int count = 1; 
+        
+        for(int layer = 0; layer <(n+1)/2; layer++){
+            
+            for(int ptr = layer; ptr<n-layer; ptr++){
+                results[layer][ptr]=count++;
+            }
+            
+            for(int ptr = layer+1; ptr<n-layer; ptr++){
+                results[ptr][n-layer-1]=count++;
+            }
+            
+            for(int ptr = n-layer-2; ptr > layer-1; ptr--){
+                results[n-layer-1][ptr]=count++;
+            }
+            
+            for(int ptr = n-layer-2; ptr > layer; ptr-- ){
+                results[n-layer-2][layer]=count++;
+            }
+            
+        }
+        
+        return results;
+    }
+}
