@@ -1,0 +1,30 @@
+Write down the start point and the end point for each turning point. 
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> matrixList = new ArrayList<Integer>();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int tLayer = (Math.min(row, column)+1)/2;
+        for(int layer = 0; layer<tLayer; layer++){
+            
+            for(int ptr=layer; ptr<column-layer; ptr++){
+                if(matrixList.size()<row*column){matrixList.add(matrix[layer][ptr]);}
+            }
+            
+            for(int ptr = layer+1; ptr<row-layer; ptr++){
+                if(matrixList.size()<row*column){matrixList.add(matrix[ptr][column-layer-1]);}
+            }
+            
+            for(int ptr = column-layer-2; ptr > layer-1; ptr--){
+                if(matrixList.size()<row*column){matrixList.add(matrix[row-layer-1][ptr]);}
+            }
+            
+            for(int ptr = row-layer-2; ptr>layer; ptr--){
+                if(matrixList.size()<row*column){matrixList.add(matrix[ptr][layer]);}
+            }
+            
+        }
+        return matrixList;
+    }
+}
