@@ -1,0 +1,78 @@
+Most basic linkedlist 题目
+
+Method 1 without dummy Node
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        while(head!=null && head.val == val){
+            head = head.next;
+        }
+        
+        if(head == null){
+            return null;
+        }
+
+        ListNode currentNode = head;
+        ListNode nextNode = head.next;
+        
+        while(nextNode!=null){
+            if(nextNode.val != val){
+                currentNode = currentNode.next;
+                nextNode = nextNode.next;
+            }
+            else{
+                currentNode.next=nextNode.next;
+                nextNode = currentNode.next;
+            }
+        }
+        return head;
+    }
+}
+
+
+
+Method 2 use dummy Node
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if(head==null){
+            return null;
+        }
+        
+        ListNode dummy = new ListNode(-1, head);
+        ListNode currentNode = dummy;
+        ListNode nextNode = head;
+        
+        while(nextNode!=null){
+            if(nextNode.val!=val){
+                currentNode = currentNode.next;
+                nextNode = currentNode.next;
+            }
+            else{
+                currentNode.next=nextNode.next;
+                nextNode=currentNode.next;
+            }
+        }
+        return dummy.next;
+    }
+    
+}
