@@ -1,0 +1,131 @@
+Need to review this basical operation for linkedlist
+
+Points: 1. Define the Node class to be used in linkedlist
+2. For linkedlist the variable is size and head
+3. For addAtIndex be careful about when the head is null and how to iternate to the index. 
+4. For removeAtIndex be careful about how to iterate to the index. 
+5. dont forget to change the size. 
+
+
+
+
+class ListNode{
+    int val;
+    ListNode next;
+    
+    ListNode(int val){
+        this(val,null);
+    }
+    
+    ListNode(int val, ListNode next){
+        this.val=val;
+        this.next=next;
+    }
+}
+
+
+
+class MyLinkedList {
+    int size;
+    ListNode head;
+
+    public MyLinkedList() {
+        this.size=0;
+        this.head=null;
+        
+    }
+    
+    public int get(int index) {
+        if(index<0 || index >= this.size){
+            return -1;
+        }
+        ListNode curr = this.head;
+        for(int i=0; i<index; i++){
+            curr = curr.next;
+        }
+        return curr.val;
+    }
+    
+    public void addAtHead(int val) {
+        if(this.head==null){
+            this.head=new ListNode(val);
+            size++;
+        }
+        else{
+            ListNode temp = new ListNode(val);
+            temp.next=this.head;
+            this.head=temp;
+            this.size++;
+        }
+    }
+    
+    public void addAtTail(int val) {
+        if(this.head==null){
+            this.head=new ListNode(val);
+            size++;
+        }
+        else{
+            ListNode curr = this.head;
+            while(curr.next!=null){
+                curr=curr.next;
+            }
+            curr.next=new ListNode(val);
+            size++;
+        }
+    }
+    
+    public void addAtIndex(int index, int val) {
+        if(index<0 || index>this.size){
+            return;
+        }
+        if(index ==0){
+            ListNode temp = new ListNode(val);
+            temp.next=this.head;
+            this.head=temp;
+            size++;
+        }
+        else{
+        ListNode pre = new ListNode(-1, head);
+        ListNode curr = this.head;
+        for(int i=0; i<index;i++){
+            pre=pre.next;
+            curr=curr.next;
+        }
+        ListNode temp = new ListNode(val);
+        temp.next=curr;
+        pre.next = temp;
+        size++;
+        }
+
+    }
+    
+    public void deleteAtIndex(int index) {
+        if(index<0 || index>=this.size){
+            return;
+        }
+        else if(index == 0){
+            this.head = this.head.next;
+            size--;
+        }
+        else{
+            ListNode pre = new ListNode(-1,head);
+            ListNode curr = this.head;
+            for(int i=0; i<index; i++){
+                pre=pre.next;
+                curr=curr.next;
+            }
+            pre.next=curr.next;
+            size--;
+        }
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
