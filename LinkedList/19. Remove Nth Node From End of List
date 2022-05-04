@@ -1,0 +1,31 @@
+用双指针 第一个指针先走n+1步
+记得从dummy node开始走 不然会有null pointer issue
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode pre = new ListNode(-1,head);
+        ListNode fast = pre;
+        for(int fastN = 0; fastN<=n; fastN++){
+            fast = fast.next;
+        }
+        ListNode slow = pre;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        slow.next=slow.next.next;
+        return pre.next;
+    }
+}
