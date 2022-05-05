@@ -1,0 +1,77 @@
+第一个快指针快速走到两个linkedlist size相同的地方
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode dummyA = new ListNode(0);
+        dummyA.next = headA;
+        ListNode A = dummyA;
+        int m = 0;
+        
+        
+        ListNode dummyB = new ListNode(0);
+        dummyB.next=headB;
+        ListNode B = dummyB;
+        int n= 0; 
+        
+        
+        while(A.next!=null){
+            A = A.next;
+            m++;
+        }
+        while(B.next!=null){
+            B = B.next;
+            n++;
+        }
+        
+        A = dummyA;
+        B = dummyB;
+        
+        if(m == 0 || n == 0){
+            return null;
+        }
+        else if(m > n){
+            int diff = m-n;
+            for (int i=0; i<m-n;i++){
+                A=A.next;
+            }
+            while(A!=null){
+                if(A==B){
+                    return A;
+                }
+                else{
+                    A=A.next;
+                    B=B.next;
+                }
+            }
+            return null;
+        }
+        
+        else{
+            int diff = n - m;
+            for (int i=0; i<n-m; i++){
+                B=B.next;
+            }
+            while(A!=null){
+                if(A==B){
+                    return A;
+                }
+                else{
+                    A=A.next;
+                    B=B.next;
+                }
+            }
+            return null;
+        }
+    }
+}
