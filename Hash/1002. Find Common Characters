@@ -1,0 +1,46 @@
+Use one hasharray to check the occurance of char in individual string
+use another hasharray to check the least number of occurance for each char among all the strings
+
+
+class Solution {
+    public List<String> commonChars(String[] words) {
+        if(words==null){
+            return null;
+        }
+        
+        int ascii = (int)('a');
+        int[] hashtable= new int[26];
+        for(int i=0; i<words[0].length();i++){
+            char wordsChar = words[0].charAt(i);
+            int indivAscii = (int)wordsChar;
+            hashtable[indivAscii-ascii]++;
+        }
+
+        ArrayList<String> returnList = new ArrayList<String>(); 
+        
+        
+        for (int n=1;n<words.length;n++){
+            int[] indivHash= new int[26];
+            for(int i=0; i<words[n].length();i++){
+                char wordsChar = words[n].charAt(i);
+                int indivAscii = (int)wordsChar;
+                indivHash[indivAscii-ascii]++;
+            }
+            for(int j=0; j<hashtable.length; j++){
+                hashtable[j]=Math.min(hashtable[j],indivHash[j]);
+            }  
+        }
+        
+        for(int m =0; m<hashtable.length; m++){
+            if(hashtable[m] > 0){
+                for(int o = 0; o < hashtable[m];o++){
+                    char temp = (char)(m+ascii);
+                    returnList.add(String.valueOf(temp));
+                }                
+            }               
+        }
+        return returnList;
+        
+        
+    }
+}
