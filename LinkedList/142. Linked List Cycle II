@@ -1,0 +1,51 @@
+快指针走2 慢指针走1 先确定有没有环
+有环的话 一个指针从相遇节点开始走 一个指针从头开始走 碰到的时候是环的开头 
+不要忘记用dummyNode 来解决环的开头是head的问题
+
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null || head.next == null){
+            return null;
+        } 
+        
+        ListNode pre = new ListNode(-1);
+        pre.next = head;
+
+        ListNode fastNode = pre.next.next;
+        ListNode slowNode = pre.next;
+        
+        while(fastNode != null && slowNode != null){
+            if(fastNode != slowNode && fastNode.next!=null){
+                slowNode = slowNode.next;
+                fastNode = fastNode.next.next;
+            }
+            else if(fastNode != slowNode && fastNode.next == null){
+                return null;
+            }
+            else{
+                slowNode = pre;
+                while(fastNode!=slowNode){
+                    fastNode=fastNode.next;
+                    slowNode=slowNode.next;
+                }
+                return slowNode;
+                
+            }
+        }
+        
+        return null;
+        
+    }
+}
