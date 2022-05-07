@@ -1,0 +1,28 @@
+Use Hashset to check whether the element is there. 
+
+
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> setOne = new HashSet<>();
+        HashSet<Integer> returnSet = new HashSet<>();
+        for (int i = 0; i < nums1.length; i++){
+            if(!setOne.contains(nums1[i])){
+                setOne.add(nums1[i]);
+            }
+        }
+        for (int j = 0; j < nums2.length; j++){
+            if(setOne.contains(nums2[j]) && !returnSet.contains(nums2[j])){
+                returnSet.add(nums2[j]);
+            }
+        }
+        int[] returnArray = new int[returnSet.size()];
+        int m = 0;
+        for(Integer temp: returnSet){
+            returnArray[m]=temp;
+            m++;
+        }
+        
+        return returnArray;
+    }
+}
