@@ -1,0 +1,31 @@
+count 2 of them first and put it in a hashmap 
+key is the value value is the count
+then do 2 sums again and search 0-sum in the hashmap
+
+class Solution {
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        int returnCounts = 0;
+        for (int i=0; i<nums1.length; i++){
+            for(int j=0; j<nums2.length; j++){
+                int temp = nums1[i]+nums2[j];
+                if(hash.containsKey(temp)){
+                    hash.put(temp,hash.get(temp)+1);
+                }
+                else{
+                    hash.put(temp,1);   
+                }
+            }
+        }
+        
+        for(int m=0; m<nums3.length; m++){
+            for(int n=0; n<nums4.length; n++){
+                int temp = nums3[m]+nums4[n];
+                if(hash.containsKey(0-temp)){
+                    returnCounts = returnCounts+hash.get(0-temp);
+                }
+            }
+        }
+        return returnCounts;
+    }
+}
