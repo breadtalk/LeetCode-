@@ -1,0 +1,22 @@
+use int[] as the hashmap
+
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] reference = new int[26];
+        int ref = (int)('a');
+        for(int i=0;i<magazine.length();i++){
+            int temp = (int)magazine.charAt(i) - ref;
+            reference[temp]++;
+        }
+        for(int j=0; j<ransomNote.length();j++){
+            int temp = (int)ransomNote.charAt(j)-ref;
+            reference[temp]--;
+            if(reference[temp]<0){
+                return false;
+            }
+        }
+        return true;
+        
+    }
+}
