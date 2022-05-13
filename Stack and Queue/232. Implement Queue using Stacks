@@ -1,0 +1,55 @@
+stack 倒腾2遍就是queue
+
+
+class MyQueue {
+    Stack<Integer> queueIn;
+    Stack<Integer> queueOut;
+
+    public MyQueue() {
+        queueIn = new Stack<Integer>();
+        queueOut = new Stack<Integer>();
+    }
+    
+    public void push(int x) {
+        queueIn.push(x);
+    }
+    
+    public int pop() {
+
+        if(!queueOut.empty()){
+            return queueOut.pop();
+        }
+        else{
+            while(!queueIn.empty()){
+                queueOut.push(queueIn.pop());
+            }
+            return queueOut.pop();
+        }
+    }
+    
+    public int peek() {
+        
+        if (!queueOut.empty()){
+            return queueOut.peek();
+        }
+        else{
+            while(!queueIn.empty()){
+                queueOut.push(queueIn.pop());
+            }
+            return queueOut.peek();
+        }
+    }
+    
+    public boolean empty() {
+        return (queueIn.empty() && queueOut.empty());
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
