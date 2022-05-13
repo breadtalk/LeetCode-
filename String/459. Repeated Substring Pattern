@@ -1,0 +1,40 @@
+用KMP
+如果nextTable最后一位是0 说明没有最长相同前后缀 false
+如果最后一位不是0 的话 最后一位的数字是最长相同前后缀的长度
+最短的pattern的就是 s.length - 最长相同前后缀长度
+如果最短pattern能被s.length整除 就说明是repeat的 不能的话就不是
+
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        int[] nextTable = new int[s.length()];
+        nextTable[0]=0;
+        int i=0; 
+        int j=1;
+        while(j<s.length()){
+            if(s.charAt(i)==s.charAt(j)){
+                nextTable[j]=i+1;
+                i++;
+                j++;
+            }
+            else if(s.charAt(i)!=s.charAt(j) && i==0){
+                nextTable[j]=0;
+                j++;
+            }
+            else{
+                i=nextTable[i-1];
+            }
+        }
+        if(nextTable[nextTable.length-1]==0){
+            return false;
+        }
+        else{
+            int pattern = s.length() - nextTable[nextTable.length-1];
+            if(s.length()%pattern == 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+}
