@@ -1,0 +1,35 @@
+很多edge case 
+if语句的判断
+
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()<=1 || s.length()%2!=0){
+            return false;
+        }
+        Stack<Character> sChar = new Stack<>();
+        for(int i=s.length()-1;i>=0;i--){
+            char temp = s.charAt(i);
+            if(temp == '}' || temp == ']' || temp==')'){
+                sChar.push(temp);
+            }
+            else if(temp=='(' && (sChar.isEmpty() || sChar.peek()!=')')){
+                return false;
+            }
+            else if(temp == '[' && (sChar.isEmpty() || sChar.peek()!=']')){
+                return false;
+            }
+            else if(temp == '{' && (sChar.isEmpty() || sChar.peek()!='}')){
+                return false;
+            }
+            else{
+                sChar.pop();
+            }
+        }
+        if (sChar.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
