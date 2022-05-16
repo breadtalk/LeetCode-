@@ -1,0 +1,24 @@
+StringBuilder 用法要在熟悉一下
+
+class Solution {
+    public String removeDuplicates(String s) {
+        if(s.length()<=1){
+            return s;
+        }
+        Stack<Character> sChar = new Stack<>();
+        for(int i = s.length()-1; i>=0;i--){
+            char temp = s.charAt(i);
+            if(sChar.isEmpty() || temp!= sChar.peek()){
+                sChar.push(temp);
+            }
+            else{
+                sChar.pop();
+            }
+        }
+        StringBuilder str= new StringBuilder();
+        while(!sChar.isEmpty()){
+            str.append(sChar.pop());
+        }
+        return str.toString();
+    }
+}
