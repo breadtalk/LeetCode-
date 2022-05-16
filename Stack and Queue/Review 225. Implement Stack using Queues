@@ -1,0 +1,50 @@
+Stack is a class. Queue is a interface. Get familiar with ArrayDeque and linkedlist to represent queue. 
+queue 无论倒几次还是原来的顺序 要用备份queue
+
+class MyStack {
+    ArrayDeque<Integer> stack1;
+    ArrayDeque<Integer> stack2;
+    
+    public MyStack() {
+        stack1 = new ArrayDeque<>();
+        stack2 = new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+        stack1.addLast(x);
+    }
+    
+    public int pop() {
+       if(stack1.size()<=1){
+            return stack1.pop();
+        }
+        else{
+            int size = stack1.size();
+            for(int i=0; i<size-1;i++){
+                stack2.addLast(stack1.pollFirst());
+            }
+            int temp = stack1.pollFirst();
+            for(int j=0;j<size-1;j++){
+                stack1.addLast(stack2.pollFirst());
+            }
+            return temp;
+        }
+    }
+    
+    public int top() {
+        return stack1.peekLast();
+    }
+    
+    public boolean empty() {
+        return stack1.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
