@@ -1,4 +1,5 @@
 第一个用recursive method 第二个用stack
+stack里面先放middle再放右儿子再放左儿子
 
 /**
  * Definition for a binary tree node.
