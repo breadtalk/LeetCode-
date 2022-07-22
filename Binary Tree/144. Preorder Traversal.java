@@ -1,5 +1,7 @@
 第一个用recursive method 第二个用stack
-stack里面先放middle再放右儿子再放左儿子
+Preorder的顺序是middle left right
+放进stack的顺序是 middle 然后pop 然后right 然后left 这样出来的时候left 先出来
+
 
 /**
  * Definition for a binary tree node.
