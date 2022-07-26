@@ -1,4 +1,8 @@
 第一个用BFS的方法 注意arrayDequeue的用法
+第二种方法用DFS来做level order traversal
+用一个int来track which level you are at recursive每次回去的时候回到原来的level
+
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -48,3 +52,48 @@ class Solution {
     }
 }
 
+
+
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> returnList = new ArrayList<List<Integer>>();
+        levelOrderDFS(returnList, root, 0);
+        return returnList;
+        
+    }
+    public void levelOrderDFS(List<List<Integer>> returnList, TreeNode node, Integer depth){
+        if (node == null){
+            return;
+        }
+        depth++;
+        
+        if(returnList.size()<depth){
+            ArrayList<Integer> newLevel = new ArrayList<>();
+            returnList.add(newLevel);
+        }
+        returnList.get(depth-1).add(node.val);
+        levelOrderDFS(returnList, node.left, depth);
+        levelOrderDFS(returnList, node.right, depth);
+        
+        
+    }
+    
