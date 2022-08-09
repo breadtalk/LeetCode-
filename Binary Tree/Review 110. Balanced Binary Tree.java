@@ -34,9 +34,7 @@ class Solution {
 
 第二个办法再计算height的时候同时计算是不是balanced 一旦不是balanced就推出O(n)
   
-  
-  
-  /**
+/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -70,8 +68,8 @@ class Solution {
         int right = getHeight(root.right);
         if (Math.abs(left - right) > 1){
             balanced = false;
+            return -1;
         }
         return Math.max(left,right)+1;
     }
 }
-  
