@@ -1,4 +1,6 @@
-106 given the postorder and inorder to construct a binary tree. Boundary 非常难确定
+106 given the postorder and inorder to construct a binary tree. postorder boundary很难确定
+newCut - inStart + 1 就是一共有多少个节点在左面 靠这个来确定节点
+
 来看一下一共分几步：
 第一步：如果数组大小为零的话，说明是空节点了。
 第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
@@ -33,8 +35,6 @@ class Solution {
         return buildTreeHelper(inorder, inStart, inEnd, postorder, inStart, inEnd);
     }
     public TreeNode buildTreeHelper(int[] inorder, int inStart, int inEnd, int[] postorder, int postStart, int postEnd){
-        System.out.println("inStart" + inStart + "inEnd" + inEnd);
-        System.out.println("postStart" + postStart + "postEnd" + postEnd);
         if(inStart > inEnd){
             return null;
         }
@@ -47,12 +47,10 @@ class Solution {
         for (int i = inStart; i <= inEnd; i++){
             if (inorder[i] == root.val){
                 newCut = i;
-                System.out.println("newCut" + newCut);
                 break;
             }
         }
-        //System.out.println("inStart" + inStart + "inEnd" + inEnd);
-        //System.out.println("postStart" + postStart + "postEnd" + postEnd);
+
         root.left = buildTreeHelper(inorder, inStart, newCut-1, postorder, postStart, postStart+newCut-1-inStart);
         root.right = buildTreeHelper(inorder, newCut+1, inEnd, postorder, postStart+newCut-inStart, postEnd);
         return root;  
