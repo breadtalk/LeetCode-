@@ -1,0 +1,61 @@
+106 given the postorder and inorder to construct a binary tree. 
+来看一下一共分几步：
+第一步：如果数组大小为零的话，说明是空节点了。
+第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
+第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点
+第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）
+第五步：切割后序数组，切成后序左数组和后序右数组
+第六步：递归处理左区间和右区间
+
+105 given the preorder and inorder to construct a binary tree. 
+
+solution for 106. I dont think it is the ideal solution 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        int inStart = 0;
+        int inEnd = inorder.length - 1;
+        return buildTreeHelper(inorder, inStart, inEnd, postorder, inStart, inEnd);
+    }
+    public TreeNode buildTreeHelper(int[] inorder, int inStart, int inEnd, int[] postorder, int postStart, int postEnd){
+        System.out.println("inStart" + inStart + "inEnd" + inEnd);
+        System.out.println("postStart" + postStart + "postEnd" + postEnd);
+        if(inStart > inEnd){
+            return null;
+        }
+        if(inEnd == inStart){
+            return new TreeNode(inorder[inStart]);
+        }
+        TreeNode root = new TreeNode(postorder[postEnd]);
+        postEnd--;
+        int newCut = 0;
+        for (int i = inStart; i <= inEnd; i++){
+            if (inorder[i] == root.val){
+                newCut = i;
+                System.out.println("newCut" + newCut);
+                break;
+            }
+        }
+        //System.out.println("inStart" + inStart + "inEnd" + inEnd);
+        //System.out.println("postStart" + postStart + "postEnd" + postEnd);
+        root.left = buildTreeHelper(inorder, inStart, newCut-1, postorder, postStart, postStart+newCut-1-inStart);
+        root.right = buildTreeHelper(inorder, newCut+1, inEnd, postorder, postStart+newCut-inStart, postEnd);
+        return root;  
+        
+    }
+}
