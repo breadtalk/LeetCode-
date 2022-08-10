@@ -1,4 +1,4 @@
-第一个用BFS的方法 注意arrayDequeue的用法
+第一个用BFS的方法 注意arrayDeque的用法
 第二种方法用DFS来做level order traversal
 用一个int来track which level you are at recursive每次回去的时候回到原来的level
 
