@@ -17,3 +17,82 @@
 此时可以初始化比较元素为longlong的最小值。
 问题可以进一步演进：如果样例中根节点的val 可能是longlong的最小值 又要怎么办呢？文中会解答。
 了解这些陷阱之后我们来看一下代码应该怎么写：
+
+
+第一种做法 recursive 用一个bound min max来看node val是不是再这个范围里
+然后recursively 用node.val来update min max value
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValidHelper(root, Long.MAX_VALUE, Long.MIN_VALUE);
+        
+    }
+    public boolean isValidHelper(TreeNode node, long max, long min){
+        if(node == null){
+            return true; 
+        }
+        if(node.val >= max || node.val <= min){
+            return false;
+        }
+        return isValidHelper(node.left, node.val, min) && isValidHelper(node.right, max, node.val);
+    }
+}
+
+
+第二个办法用inorder traversal 然后看是不是单调递增
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        ArrayList<Integer> returnList = new ArrayList<>();
+        inOrderHelper(root, returnList);
+        long min = Long.MIN_VALUE;
+        for(int i = 0; i < returnList.size(); i++){
+            if(returnList.get(i) <= min){
+                return false;
+            }
+            min = returnList.get(i);
+        }
+        return true;
+        
+    }
+    public void inOrderHelper(TreeNode node, ArrayList<Integer> returnList){
+        if(node == null){
+            return;
+        }
+        inOrderHelper(node.left, returnList);
+        returnList.add(node.val);
+        inOrderHelper(node.right, returnList);
+    }
+}
+
