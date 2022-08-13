@@ -1,0 +1,43 @@
+要给tree连起来的一定要return treenode 然后用tree.left = 
+tree.right =
+每次考察的是node.val 如果node.val < low 就用node.right放上去
+如果node.val > high 就用node.left放上去
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        root = trimHelper(root, low, high);
+        return root;
+    }
+    public TreeNode trimHelper(TreeNode node, int low, int high){
+        if(node == null){
+            return null;
+        }
+        if(node.val < low){
+            return trimHelper(node.right, low, high);//不要忘记还是要把这个node放进method里面表示return的node再range里面
+            
+        }
+        if(node.val > high){
+            return trimHelper(node.left, low, high);////不要忘记还是要把这个node放进method里面表示return的node再range里面
+        }
+        node.left = trimHelper(node.left, low, high); //只是为了把tree连起来
+        node.right = trimHelper(node.right, low, high); //只是为了把tree连起来
+        return node;
+    }
+}
