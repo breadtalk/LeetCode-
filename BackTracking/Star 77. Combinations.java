@@ -21,3 +21,26 @@ class Solution {
         }
     }
 }
+
+优化 剪枝操作
+class Solution {
+    
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> subList = new LinkedList<>();
+    
+    public List<List<Integer>> combine(int n, int k) {
+        combineHelper(n, k, 1);
+        return result;
+    }
+    public void combineHelper(int n, int k, int startPoint){
+        if(subList.size() == k){
+            result.add(new LinkedList(subList));
+            return;
+        }
+        for(int i = startPoint; i <= n-(k-subList.size())+1; i++){ //k-subList.size() 就是还剩下的要取的子集长度 停在n-这个长度+1就可以了
+            subList.add(i);
+            combineHelper(n, k, i+1);
+            subList.removeLast();
+        }
+    }
+}
