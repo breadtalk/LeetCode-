@@ -1,0 +1,22 @@
+如果后一天比前一天高就留着累计profit
+不然的话就卖掉重新开始
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length == 1){
+            return 0;
+        }
+        int buyPrice = prices[0];
+        int profit = 0;
+        for(int i = 1; i < prices.length; i++){
+            if(prices[i] < prices[i-1]){
+                buyPrice = prices[i];
+            }
+            else{
+                profit = profit + (prices[i] - prices[i-1]);
+            }
+            
+        }
+        return profit;
+    }
+}
