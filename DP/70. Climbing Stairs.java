@@ -7,7 +7,7 @@
 n-1再走一格
 或者n-2再走两格
 
-所以就是n-1 加上 n-2
+所以就是n-1 加上 n-2 不需要记录整个数组 只需要前2位就可以了
   
   
   class Solution {
@@ -23,5 +23,24 @@ n-1再走一格
             dp[index] = (dp[index-1] - dp[index-2]) + dp[index-2]*2;
         }
         return dp[n];
+    }
+}
+
+
+class Solution {
+    public int climbStairs(int n) {
+        if(n <= 2){
+            return n;
+        }
+        int[] dp = new int[4];
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int index = 3; index <= n; index++){
+            int temp = dp[2] + dp[1];
+            dp[1] = dp[2];
+            dp[2] = temp;
+        }
+        return dp[2];
     }
 }
