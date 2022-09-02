@@ -1,3 +1,15 @@
+分成左右两个子集 
+左-右 = target 
+左+右 = sum
+如果target 绝对值大于sum无解
+target+sum除不了2 无解
+剩下要求多少种可以凑成 （sum+target）/2的方法
+length 就是记录sum 
+dp里的数字记录能到某个length有多少种方法
+
+
+
+
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
         int sum = 0;
