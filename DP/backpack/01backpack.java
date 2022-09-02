@@ -55,3 +55,41 @@ public class test {
 
 
 
+
+
+
+
+
+one dimension array
+
+import java.util.*;
+
+public class test {
+  public static void main(String[] args) {
+    int[] weight = {1, 3, 4};
+    int[] value = {15, 20, 30};
+    int bagsize = 4;
+    backPackProblem(weight, value, bagsize);
+  }
+
+  public static void backPackProblem(int[] weight, int[] value, int bagsize){
+    int[]dp = new int[bagsize + 1];
+    for(int i = 0; i < weight.length; i++){
+      for(int j = bagsize; j >= weight[i]; j--){
+        dp[j] = Math.max(dp[j], dp[j-weight[i]] + value[i]);
+      }
+    }
+
+    for(int j = 0; j<dp.length; j++){
+      System.out.println(dp[j]);
+    }
+
+
+  }
+}
+
+
+
+
+
+
