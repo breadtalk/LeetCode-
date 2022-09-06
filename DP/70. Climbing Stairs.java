@@ -59,9 +59,6 @@ class Solution {
                 if(i >= stairs[j]){
                     dp[i] = dp[i] + dp[i-stairs[j]];
                 }
-                else{
-                    dp[i] = dp[i-1];
-                }
             }
         }
         return dp[n];
