@@ -8,6 +8,8 @@ n-1再走一格
 或者n-2再走两格
 
 所以就是n-1 加上 n-2 不需要记录整个数组 只需要前2位就可以了
+
+第三种办法用完全背包的方法来做这一题
   
   
   class Solution {
@@ -42,5 +44,26 @@ class Solution {
             dp[2] = temp;
         }
         return dp[2];
+    }
+}
+
+
+
+class Solution {
+    public int climbStairs(int n) {
+        int[] stairs = {1, 2};
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        for(int i = 1; i <= n; i++){
+            for(int j = 0; j < stairs.length; j++){
+                if(i >= stairs[j]){
+                    dp[i] = dp[i] + dp[i-stairs[j]];
+                }
+                else{
+                    dp[i] = dp[i-1];
+                }
+            }
+        }
+        return dp[n];
     }
 }
