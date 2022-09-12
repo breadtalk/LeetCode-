@@ -6,7 +6,7 @@
 
 初始化dp[0][0] -prices[0] 其他都是卖出状态最少为0 负数不必卖出
 
-最后profit取后三个状态最大值
+最后profit取后三个状态最大值 股票问题最大收益肯定在卖出状态 本题有两个卖出状态 所以要取最大值 如果最后一天是冷冻期冷冻期也有可能是最大值
 
 class Solution {
     public int maxProfit(int[] prices) {
