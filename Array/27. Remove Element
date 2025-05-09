@@ -36,7 +36,7 @@ class Solution {
 
 
 
-Second method is to use two 指针
+Second method is to use two 指针 同方向指针is easier
 
 
 
@@ -58,3 +58,6 @@ class Solution {
         return slowIndex;
     }
 }
+
+
+
